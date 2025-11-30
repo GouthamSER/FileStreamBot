@@ -20,7 +20,7 @@ PrivacyText = \
 
 **4.Moderation:** The bot owner can view and delete your files if necessary.
 
-**5.Open Source:** The bot is [open source](https://github.com/TheCaduceus/FileStreamBot). Deploy your own instance for maximum privacy.
+**5.Open Source:** The bot is [open source](https://github.com/GouthamSER). re-Edited Deploy your own instance for maximum privacy.
 
 **6.Retention:** Files are stored until you revoke their links.
 
@@ -65,3 +65,4 @@ UserNotInAllowedList = \
 """
 You are not allowed to use this bot.
 """
+

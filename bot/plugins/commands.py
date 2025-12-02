@@ -5,11 +5,14 @@ from bot.config import Telegram
 from bot.modules.static import *
 from bot.modules.decorators import verify_user
 
-# DB FUNCTIONS
-from bot.plugins.db import add_user, get_all_users
+from hydrogram.errors import (
+    PeerIdInvalid, FloodWait, ChatWriteForbidden,
+    UserDeactivated, RPCError
+)
+
+from bot.plugins.db import add_user, get_all_users, remove_user
 
 import asyncio
-
 
 # ADD USER + START COMMAND
 @TelegramBot.on_message(filters.command(['start', 'help']) & filters.private)
@@ -52,8 +55,6 @@ async def log_command(_, msg: Message):
     await msg.reply_document('event-log.txt', quote=True)
 
 
-
-# BROADCAST COMMAND (Owner Only)
 @TelegramBot.on_message(filters.command("broadcast") & filters.user(Telegram.OWNER_ID))
 async def broadcast_command(_, msg: Message):
 
@@ -65,19 +66,32 @@ async def broadcast_command(_, msg: Message):
     users = get_all_users()
     sent = 0
     failed = 0
+    removed = 0
 
     await msg.reply("📢 Broadcast Started...")
 
     for user in users:
+        uid = user["_id"]
+
         try:
-            await TelegramBot.send_message(user["_id"], text)
+            await TelegramBot.send_message(uid, text)
             sent += 1
             await asyncio.sleep(0.1)
-        except:
+
+        except FloodWait as e:
+            await asyncio.sleep(e.value)
+
+        except (PeerIdInvalid, ChatWriteForbidden, UserDeactivated):
+            remove_user(uid)        # <── AUTO REMOVE USER
+            removed += 1
+            failed += 1
+
+        except RPCError:
             failed += 1
 
     await msg.reply(
         f"📣 **Broadcast Completed**\n"
         f"✅ Sent: `{sent}`\n"
-        f"❌ Failed: `{failed}`"
+        f"❌ Failed: `{failed}`\n"
+        f"🗑 Removed Blocked Users: `{removed}`"
     )

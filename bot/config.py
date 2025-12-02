@@ -8,7 +8,7 @@ class Telegram:
     BOT_USERNAME = env.get("TELEGRAM_BOT_USERNAME", "BotFather")
     BOT_TOKEN = env.get("TELEGRAM_BOT_TOKEN", "1234567:xyz")
     CHANNEL_ID = int(env.get("TELEGRAM_CHANNEL_ID", -100123456789))
-    MONGO_URI = env.get("MONGO_URI", "MONGODB.COM")
+    MONGO_URL = env.get("MONGO_URL", "MONGODB.COM")
     DB_NAME = env.get("DB_NAME","MONGODBNAME")
     SECRET_CODE_LENGTH = int(env.get("SECRET_CODE_LENGTH", 24))
 
@@ -56,3 +56,4 @@ LOGGER_CONFIG_JSON = {
         }
     }
 }
+

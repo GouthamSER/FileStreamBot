@@ -28,8 +28,8 @@ async def start_command(_, msg: Message):
     # Send new user log
     if new:
         await TelegramBot.send_message(
-            Telegram.LOG_CHANNEL,
-            f"🔔 New User Joined\n"
+            Telegram.CHANNEL_ID,
+            f"🔔 New User Joined in File2Link\n"
             f"👤 Name: `{name}`\n"
             f"🆔 ID: `{user_id}`"
         )

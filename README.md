@@ -2,6 +2,9 @@
 <b>An open-source Python Telegram bot to transmit Telegram files over HTTP.</b>
 </div><br>
 
+📌📌📌 ADDED 
+- Mongodb for users save and broadcast feature
+
 ## **📑 INDEX**
 
 * [**⚙️ Installation**](#installation)
@@ -70,6 +73,8 @@ pip install -r requirements.txt
 * `API_ID`|`TELEGRAM_API_ID`: API ID of your Telegram account, can be obtained from [My Telegram](https://my.telegram.org). `int`
 * `API_HASH`|`TELEGRAM_API_HASH`: API hash of your Telegram account, can be obtained from [My Telegram](https://my.telegram.org). `str`
 * `OWNER_ID`: ID of your Telegram account, can be obtained by sending **/info** to [@DumpJsonBot](https://t.me/DumpJsonBot). `int`
+* `MONGO_URL`|: Mongodb Link.
+* `DB_NAME`|: Mongodb NAME.
 * `ALLOWED_USER_IDS`: A list of Telegram account IDs (separated by spaces) that are permitted to use the bot. Leave this field empty to allow anyone to use it. `str`
 * `BOT_USERNAME`|`TELEGRAM_BOT_USERNAME`: Username of your Telegram bot, create one using [@BotFather](https://t.me/BotFather). `str`
 * `BOT_TOKEN`|`TELEGRAM_BOT_TOKEN`: Telegram API token of your bot, can be obtained from [@BotFather](https://t.me/BotFather). `str`
@@ -105,10 +110,12 @@ docker run -p 8080:8080 file-stream-bot
 <a name="help"></a>
 
 ## ⛑️ Need help!
-- Ask questions or doubts [here](https://t.me/DrDiscussion).
+- Ask questions or doubts [here](https://t.me/im_goutham_josh).
 
 <a name="credits"></a>
 
 ## ❤️ Credits & Thanks
 
 [**Dr.Caduceus**](https://github.com/TheCaduceus): Owner & developer of File Stream Bot.
+[**Goutham Josh**](https://github.com/GouthamSER): RE-EDITED & developer of File Stream Bot.
+

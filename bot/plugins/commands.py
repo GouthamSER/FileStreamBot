@@ -13,6 +13,9 @@ from hydrogram.errors import (
 from bot.plugins.db import add_user, get_all_users, remove_user
 
 import asyncio
+import os
+import sys
+
 
 # ADD USER + START COMMAND
 @TelegramBot.on_message(filters.command(['start', 'help']) & filters.private)
@@ -40,13 +43,11 @@ async def start_command(_, msg: Message):
     )
 
 
-
 # PRIVACY COMMAND
 @TelegramBot.on_message(filters.command('privacy') & filters.private)
 @verify_user
 async def privacy_command(_, msg: Message):
     await msg.reply(text=PrivacyText, quote=True, disable_web_page_preview=True)
-
 
 
 # LOG COMMAND
@@ -55,6 +56,7 @@ async def log_command(_, msg: Message):
     await msg.reply_document('event-log.txt', quote=True)
 
 
+# BROADCAST COMMAND
 @TelegramBot.on_message(filters.command("broadcast") & filters.user(Telegram.OWNER_ID))
 async def broadcast_command(_, msg: Message):
 
@@ -82,7 +84,7 @@ async def broadcast_command(_, msg: Message):
             await asyncio.sleep(e.value)
 
         except (PeerIdInvalid, ChatWriteForbidden, UserDeactivated):
-            remove_user(uid)        # <── AUTO REMOVE USER
+            remove_user(uid)
             removed += 1
             failed += 1
 
@@ -95,3 +97,15 @@ async def broadcast_command(_, msg: Message):
         f"❌ Failed: `{failed}`\n"
         f"🗑 Removed Blocked Users: `{removed}`"
     )
+
+
+# 🔄 RESTART COMMAND (OWNER ONLY)
+@TelegramBot.on_message(filters.command("restart") & filters.user(Telegram.OWNER_ID))
+async def restart_command(_, msg: Message):
+
+    await msg.reply("🔄 Bot is restarting...")
+
+    await asyncio.sleep(1)
+
+    # Restart bot process (Koyeb auto-manages restarts)
+    os.execv(sys.executable, ['python3', '-m', 'bot'])

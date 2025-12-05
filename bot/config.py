@@ -10,7 +10,7 @@ class Telegram:
     CHANNEL_ID = int(env.get("TELEGRAM_CHANNEL_ID", -100123456789))
     MONGO_URL = env.get("MONGO_URL", "MONGODB.COM")
     DB_NAME = env.get("DB_NAME","MONGODBNAME")
-    SECRET_CODE_LENGTH = int(env.get("SECRET_CODE_LENGTH", 24))
+    SECRET_CODE_LENGTH = int(env.get("SECRET_CODE_LENGTH", 9))
 
 class Server:
     BASE_URL = env.get("BASE_URL", "http://127.0.0.1:8080")
@@ -56,4 +56,5 @@ LOGGER_CONFIG_JSON = {
         }
     }
 }
+
 

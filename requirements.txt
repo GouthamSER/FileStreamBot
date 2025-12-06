@@ -2,5 +2,6 @@ hydrogram
 tgcrypto
 quart
 uvicorn
+aiohttp
 pymongo
 asyncio

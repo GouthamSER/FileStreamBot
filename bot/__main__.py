@@ -2,7 +2,7 @@
 import asyncio
 from bot import TelegramBot
 from bot.server import server
-from keepalive import keep_alive
+from bot.plugins.keepalive import keep_alive
 
 
 async def start_all():
@@ -26,3 +26,4 @@ async def start_all():
 
 if __name__ == "__main__":
     asyncio.run(start_all())
+
